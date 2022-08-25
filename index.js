@@ -94,16 +94,15 @@ app.patch("/products/:id", async (req, res) => {
   }
 });
 
-app.delete('/products/:id', async (req, res) => {
+app.delete("/products/:id", async (req, res) => {
   try {
-      const id = req.params.id;
-      const data = await Model.findByIdAndDelete(id)
-      res.send(`El producto ${data.name} fue borrado con exito`)
+    const id = req.params.id;
+    const data = await Model.findByIdAndDelete(id);
+    res.send(`El producto ${data.name} fue borrado con exito`);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
-  catch (error) {
-      res.status(400).json({ message: error.message })
-  }
-})
+});
 
 app.listen(3000, () => {
   console.log("El servidor está inicializado en el puerto 3000");
